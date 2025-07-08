@@ -1,4 +1,3 @@
-// src/controllers/perfume.controller.js
 const perfumeService = require("../services/perfume.service");
 
 const createPerfume = async (req, res) => {
