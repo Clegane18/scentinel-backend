@@ -1,17 +1,24 @@
 const express = require("express");
 const router = express.Router();
+
 const perfumeController = require("../controllers/perfume.controller");
 const validateRequest = require("../middlewares/validateRequest");
 const { createPerfumeSchema } = require("../validators/perfume.validator");
+const upload = require("../middlewares/upload");
 
-router.post(
-  "/",
-  validateRequest(createPerfumeSchema),
-  perfumeController.createPerfume
-);
-router.get("/", perfumeController.getAllPerfumes);
-router.get("/:id", perfumeController.getPerfumeById);
-router.put("/:id", perfumeController.updatePerfume);
-router.delete("/:id", perfumeController.deletePerfume);
+router
+  .route("/")
+  .post(
+    upload.single("photo"),
+    validateRequest(createPerfumeSchema),
+    perfumeController.createPerfume
+  )
+  .get(perfumeController.getAllPerfumes);
+
+router
+  .route("/:id")
+  .get(perfumeController.getPerfumeById)
+  .put(upload.single("photo"), perfumeController.updatePerfume)
+  .delete(perfumeController.deletePerfume);
 
 module.exports = router;

@@ -21,6 +21,10 @@ const Perfume = sequelize.define(
     intensity: {
       type: DataTypes.STRING, // e.g., Fresh, Sweet, Woody
     },
+    photo: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     tableName: "perfumes",
